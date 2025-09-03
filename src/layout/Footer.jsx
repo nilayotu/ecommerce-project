@@ -27,7 +27,7 @@ export default function Footer() {
       <div className="container mx-auto px-16 py-10 grid grid-cols-1 md:grid-cols-5 gap-8 text-left font-semibold">
         <div>
           <h3 className="font-bold mb-3 md:mb-4 text-md md:text-xl">Company Info</h3>
-          <ul className="space-y-2 md:space-y-4 text-sm md:text-m">
+          <ul className="space-y-2 md:space-y-4 text-sm md:text-lg">
             <li><Link to="/about" className="hover:text-[#23A6F0]">About Us</Link></li>
             <li><Link to="/career" className="hover:text-[#23A6F0]">Career</Link></li>
             <li><Link to="/hiring" className="hover:text-[#23A6F0]">We are hiring</Link></li>
@@ -37,7 +37,7 @@ export default function Footer() {
 
         <div>
           <h3 className="font-bold mb-3 md:mb-4 text-md md:text-xl">Legal</h3>
-          <ul className="space-y-2 md:space-y-4 text-sm md:text-m">
+          <ul className="space-y-2 md:space-y-4 text-sm md:text-lg">
             <li><Link to="/legal/about" className="hover:text-[#23A6F0]">About Us</Link></li>
             <li><Link to="/legal/career" className="hover:text-[#23A6F0]">Career</Link></li>
             <li><Link to="/legal/hiring" className="hover:text-[#23A6F0]">We are hiring</Link></li>
@@ -47,7 +47,7 @@ export default function Footer() {
 
         <div>
           <h3 className="font-bold mb-3 md:mb-4 text-md md:text-xl">Features</h3>
-          <ul className="space-y-2 md:space-y-4 text-sm md:text-m">
+          <ul className="space-y-2 md:space-y-4 text-sm md:text-lg">
             <li><Link to="/features/business-marketing" className="hover:text-[#23A6F0]">Business Marketing</Link></li>
             <li><Link to="/features/user-analytic" className="hover:text-[#23A6F0]">User Analytic</Link></li>
             <li><Link to="/features/live-chat" className="hover:text-[#23A6F0]">Live Chat</Link></li>
@@ -57,7 +57,7 @@ export default function Footer() {
 
         <div>
           <h3 className="font-bold mb-3 md:mb-4 text-md md:text-xl">Resources</h3>
-          <ul className="space-y-2 md:space-y-4 text-sm md:text-m">
+          <ul className="space-y-2 md:space-y-4 text-sm md:text-lg">
             <li><Link to="/resources/ios-android" className="hover:text-[#23A6F0]">IOS & Android</Link></li>
             <li><Link to="/resources/watch-a-demo" className="hover:text-[#23A6F0]">Watch a Demo</Link></li>
             <li><Link to="/resources/customers" className="hover:text-[#23A6F0]">Customers</Link></li>
@@ -68,19 +68,19 @@ export default function Footer() {
         <div>
           <h3 className="font-bold mb-3 md:mb-4 text-md md:text-xl">Get In Touch</h3>
           <ul className="space-y-3 text-sm md:text-m">
-            <li className="flex items-start justify-start gap-2">
-            <Phone className="w-4 h-4 md:w-8 md:h-8 text-[#8EC2F2] md:text-[#FFFFFF]" /> 
+            <li className="flex items-start justify-start md:text-xl gap-2">
+            <Phone className="w-4 h-4 md:w-8 md:h-8 text-[#8EC2F2]  md:text-[#FFFFFF]" /> 
             (480) 555-0103
             </li>
 
-            <li className="flex items-start justify-start gap-2">
+            <li className="flex items-start justify-start md:text-xl gap-2">
             <MapPin className="w-4 h-4 md:w-8 md:h-8 text-[#8EC2F2] md:text-[#FFFFFF]" /> 
             4517 Washington Ave.
             </li>
 
-            <li className="flex items-start justify-start gap-2">
+            <li className="flex items-start justify-start md:text-xl gap-2">
             {/* Desktop görünümde Mail ikonu */}
-            <Mail className="hidden md:block w-4 h-4 md:w-8 md:h-8 text-[#FFFFFF]" />
+            <Mail className="hidden md:block md:w-8 md:h-8 text-[#FFFFFF]" />
             
             {/* Mobile görünümde Send ikonu */}
             <Send className="block md:hidden w-4 h-4 text-[#8EC2F2]" />
@@ -94,7 +94,7 @@ export default function Footer() {
       {/* Bottom Section */}
       <div >
         <div className="container mx-auto px-16 py-6 flex flex-col md:flex-row justify-between items-start">
-          <p className="text-xs font-semibold mb-4 md:mb-0">
+          <p className="text-xs md:text-xl font-semibold mb-4 md:mb-0">
             Made With Love By Finland <br className="md:hidden" /> All Right Reserved
           </p>
         <div className="flex gap-4">
