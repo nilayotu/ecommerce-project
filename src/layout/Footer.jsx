@@ -9,16 +9,20 @@ export default function Footer() {
       <div className="container mx-auto px-16 py-10 flex flex-col md:flex-row justify-between items-start">
         {/* Left Content */}
         <div className="mb-6 md:mb-0 max-w-md">
-          <h2 className="text-xl md:text-2xl font-bold mb-2">
+          <div className="mb-6 md:mb-0 max-w-xl">
+            <h2 className="text-xl md:text-3xl font-bold mb-2 md:whitespace-nowrap">
             Consulting Agency For Your Business
-          </h2>
-          <p className="text-sm md:text-m text-[#FFFFFF]">
-            the quick fox jumps over the lazy dog
-          </p>
+            </h2>
+            <p className="text-xs md:text-lg text-[#FFFFFF]">
+            the quick fox jumps over
+            <br className="block md:hidden" />
+            the lazy dog
+            </p>
+            </div>
         </div>
 
         {/* Button */}
-        <button className="bg-[#23A6F0] text-xl text-[#FFFFFF] px-6 py-2 md:px-8 md:py-4 rounded-md font-semibold mt-4 md:mt-0">
+        <button className="bg-[#23A6F0] text-md text-[#FFFFFF] px-10 py-3 md:px-10 md:py-4 md:px-10 md:text-xl md:py-4 rounded-md font-semibold mt-4 md:mt-0">
           Contact Us
         </button>
       </div>
@@ -26,8 +30,8 @@ export default function Footer() {
       {/* Middle Links Section */}
       <div className="container mx-auto px-16 py-10 grid grid-cols-1 md:grid-cols-5 gap-8 text-left font-semibold">
         <div>
-          <h3 className="font-bold mb-3 md:mb-4 text-md md:text-xl">Company Info</h3>
-          <ul className="space-y-2 md:space-y-4 text-sm md:text-lg">
+          <h3 className="font-bold mb-3 md:mb-4 text-sm md:text-xl">Company Info</h3>
+          <ul className="space-y-2 md:space-y-4 text-xs md:text-lg">
             <li><Link to="/about" className="hover:text-[#23A6F0]">About Us</Link></li>
             <li><Link to="/career" className="hover:text-[#23A6F0]">Career</Link></li>
             <li><Link to="/hiring" className="hover:text-[#23A6F0]">We are hiring</Link></li>
@@ -36,8 +40,8 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-bold mb-3 md:mb-4 text-md md:text-xl">Legal</h3>
-          <ul className="space-y-2 md:space-y-4 text-sm md:text-lg">
+          <h3 className="font-bold mb-3 md:mb-4 text-sm md:text-xl">Legal</h3>
+          <ul className="space-y-2 md:space-y-4 text-xs md:text-lg">
             <li><Link to="/legal/about" className="hover:text-[#23A6F0]">About Us</Link></li>
             <li><Link to="/legal/career" className="hover:text-[#23A6F0]">Career</Link></li>
             <li><Link to="/legal/hiring" className="hover:text-[#23A6F0]">We are hiring</Link></li>
@@ -46,8 +50,8 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-bold mb-3 md:mb-4 text-md md:text-xl">Features</h3>
-          <ul className="space-y-2 md:space-y-4 text-sm md:text-lg">
+          <h3 className="font-bold mb-3 md:mb-4 text-sm md:text-xl">Features</h3>
+          <ul className="space-y-2 md:space-y-4 text-xs md:text-lg">
             <li><Link to="/features/business-marketing" className="hover:text-[#23A6F0]">Business Marketing</Link></li>
             <li><Link to="/features/user-analytic" className="hover:text-[#23A6F0]">User Analytic</Link></li>
             <li><Link to="/features/live-chat" className="hover:text-[#23A6F0]">Live Chat</Link></li>
@@ -56,8 +60,8 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-bold mb-3 md:mb-4 text-md md:text-xl">Resources</h3>
-          <ul className="space-y-2 md:space-y-4 text-sm md:text-lg">
+          <h3 className="font-bold mb-3 md:mb-4 text-sm md:text-xl">Resources</h3>
+          <ul className="space-y-2 md:space-y-4 text-xs md:text-lg">
             <li><Link to="/resources/ios-android" className="hover:text-[#23A6F0]">IOS & Android</Link></li>
             <li><Link to="/resources/watch-a-demo" className="hover:text-[#23A6F0]">Watch a Demo</Link></li>
             <li><Link to="/resources/customers" className="hover:text-[#23A6F0]">Customers</Link></li>
@@ -66,30 +70,30 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-bold mb-3 md:mb-4 text-md md:text-xl">Get In Touch</h3>
-          <ul className="space-y-3 text-sm md:text-m">
-            <li className="flex items-start justify-start md:text-xl gap-2">
-            <Phone className="w-4 h-4 md:w-8 md:h-8 text-[#8EC2F2]  md:text-[#FFFFFF]" /> 
+          <h3 className="font-bold mb-3 md:mb-4 text-sm md:text-xl">Get In Touch</h3>
+          <ul className="space-y-3 text-xs md:text-m">
+            <li className="flex items-start justify-start md:text-lg gap-2">
+            <Phone className="w-4 h-4 md:w-10 md:h-10 text-[#8EC2F2]  md:text-[#FFFFFF]" /> 
             (480) 555-0103
             </li>
 
-            <li className="flex items-start justify-start md:text-xl gap-2">
-            <MapPin className="w-4 h-4 md:w-8 md:h-8 text-[#8EC2F2] md:text-[#FFFFFF]" /> 
+            <li className="flex items-start justify-start md:text-lg gap-2">
+            <MapPin className="w-4 h-4 md:w-10 md:h-10 text-[#8EC2F2] md:text-[#FFFFFF]" /> 
             4517 Washington Ave.
             </li>
 
-            <li className="flex items-start justify-start md:text-xl gap-2">
+            <li className="flex items-start justify-start md:text-lg gap-2">
             {/* Desktop görünümde Mail ikonu */}
-            <Mail className="hidden md:block md:w-8 md:h-8 text-[#FFFFFF]" />
+            <Mail className="hidden md:block md:w-10 md:h-10 text-[#FFFFFF]" />
             
             {/* Mobile görünümde Send ikonu */}
-            <Send className="block md:hidden w-4 h-4 text-[#8EC2F2]" />
+            <Send className="block w-4 h-4 md:hidden text-[#8EC2F2]"/>
             
             debra.holt@example.com
             </li>
           </ul>
         </div>
-      </div>
+        </div>
 
       {/* Bottom Section */}
       <div >

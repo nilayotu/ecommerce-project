@@ -102,11 +102,11 @@ export default function Header() {
 
   {/* Mobile Dropdown Content */}
   {isOpen && (
-    <div className="flex text-xl flex-col items-center space-y-8 py-8 px-4 ">
-      <Link to="/" className="text-[#737373] hover:text-[#23A6F0]">Home</Link>
-      <Link to="/product" className="text-[#737373] hover:text-[#23A6F0]">Product</Link>
-      <Link to="/pricing" className="text-[#737373] hover:text-[#23A6F0]">Pricing</Link>
-      <Link to="/contact" className="text-[#737373] hover:text-[#23A6F0]">Contact</Link>
+    <div className="flex text-2xl flex-col items-center space-y-8 py-8 px-4 ">
+      <Link to="/" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Home</Link>
+      <Link to="/product" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Product</Link>
+      <Link to="/pricing" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Pricing</Link>
+      <Link to="/contact" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Contact</Link>
           </div>
         )}
       </div>
