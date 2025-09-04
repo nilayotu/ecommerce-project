@@ -5,6 +5,7 @@ import BestSeller from "../components/BestSeller";
 import SecondBestseller from "../components/SecondBestseller";
 import Popular from "../components/Popular";
 import SecondPopular from "../components/SecondPopular";
+import BestsellerProducts from "../components/BestsellerProducts";
 
 export default function PageContent() {
   return (
@@ -15,7 +16,7 @@ export default function PageContent() {
       <Popular />
       <SecondBestseller />
       <SecondPopular />
-      {/* ileride productCard, container vs. buraya eklenecek */}
+      <BestsellerProducts />
     </main>
   );
 }
