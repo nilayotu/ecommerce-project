@@ -3,7 +3,7 @@ import React from 'react';
 
 const Popular = () => {
   return (
-    <div className="bg-[#FFFFFF] min-h-screen">
+    <div className="bg-[#FFFFFF]">
       {/* Üst Bölüm */}
       <div className="flex flex-col lg:flex-row">
         {/* Sol Taraf - Scooter Görseli */}
@@ -22,7 +22,7 @@ const Popular = () => {
             <h2 className="text-3xl lg:text-4xl text-center font-bold text-[#252B42] mb-4 mt-8">
               MOST POPULAR
             </h2>
-            <p className="text-[#737373] text-lg font-semibold leading-relaxed text-center mx-auto lg:mx-0">
+            <p className="text-[#737373] text-lg font-semibold leading-relaxed text-center mx-8 lg:mx-0">
               We focus on ergonomics and meeting you where you work. It's only a keystroke away.
             </p>
           </div>
