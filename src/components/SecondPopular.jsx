@@ -3,7 +3,7 @@ import React from 'react';
 
 const SecondPopular = () => {
   return (
-    <div className="bg-[#FFFFFF] min-h-screen">
+    <div className="bg-[#FFFFFF]">
       {/* Üst Bölüm */}
       <div className="flex flex-col lg:flex-row-reverse">
         {/* Sağ Taraf */}
