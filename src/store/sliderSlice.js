@@ -3,7 +3,7 @@ const initialState = {
     {
       id: 1,
       title: "GROCERIES DELIVERY",
-      desc: "We know how large objects will act, but things on a small scale just do not act that way.",
+      desc: "We know how large objects will act, but things on a small scale.",
       img: "/assets/first-slider.jpg",
       btnText: "Start Now",
     },
