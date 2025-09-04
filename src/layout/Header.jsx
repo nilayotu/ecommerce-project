@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  ShoppingCart,
-  Search,
-  Menu,
-  Heart,
-  UserRound,
-  ChevronDown,
-} from "lucide-react";
+import { ShoppingCart, Search, Menu, Heart, UserRound, ChevronDown } from "lucide-react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false); // Mobil dropdown toggle
@@ -37,24 +30,9 @@ export default function Header() {
 
             {isShopOpen && (
               <div className="absolute top-full left-0 bg-white shadow-md mt-1 rounded-md min-w-[150px] z-10">
-                <Link
-                  to="/shop/category1"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  Category 1
-                </Link>
-                <Link
-                  to="/shop/category2"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  Category 2
-                </Link>
-                <Link
-                  to="/shop/category3"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  Category 3
-                </Link>
+                <Link to="/shop/category1" className="block px-4 py-2 hover:bg-gray-100">Category 1</Link>
+                <Link to="/shop/category2" className="block px-4 py-2 hover:bg-gray-100">Category 2</Link>
+                <Link to="/shop/category3" className="block px-4 py-2 hover:bg-gray-100">Category 3</Link>
               </div>
             )}
           </div>
@@ -67,10 +45,7 @@ export default function Header() {
 
         {/* Right Side Icons */}
         <div className="flex items-center gap-6">
-          <Link
-            to="/login"
-            className="flex items-center gap-2 text-[#23A6F0] font-bold"
-          >
+          <Link to="/login" className="flex items-center gap-2 text-[#23A6F0] font-bold">
             <UserRound className="w-5 h-5" />
             Login / Register
           </Link>
@@ -81,32 +56,32 @@ export default function Header() {
       </div>
 
       {/* Mobile Header */}
-<div className="md:hidden flex flex-col bg-white ">
-  <div className="flex items-center justify-between px-8 py-6">
-    {/* Logo */}
-    <Link to="/" className="text-xl font-bold text-[#252B42]">
-      Bandage
-    </Link>
+      <div className="md:hidden flex flex-col bg-white">
+        <div className="flex items-center justify-between px-8 py-6">
+          {/* Logo */}
+          <Link to="/" className="text-xl font-bold text-[#252B42]">
+            Bandage
+          </Link>
 
-    {/* Icons */}
-    <div className="flex items-center gap-4">
-      <UserRound className="w-5 h-5 font-semibold text-[#252B42]" />
-      <Search className="w-5 h-5 font-semibold text-[#252B42]" />
-      <ShoppingCart className="w-5 h-5 font-semibold text-[#252B42]" />
-      {/* Dropdown toggle */}
-      <button onClick={() => setIsOpen(!isOpen)}>
-        <Menu className="w-6 h-6 font-semibold text-[#252B42]" />
-      </button>
-    </div>
-  </div>
+          {/* Icons */}
+          <div className="flex items-center gap-4">
+            <UserRound className="w-5 h-5 text-[#252B42]" />
+            <Search className="w-5 h-5 text-[#252B42]" />
+            <ShoppingCart className="w-5 h-5 text-[#252B42]" />
+            {/* Dropdown toggle */}
+            <button onClick={() => setIsOpen(!isOpen)}>
+              <Menu className="w-6 h-6 text-[#252B42]" />
+            </button>
+          </div>
+        </div>
 
-  {/* Mobile Dropdown Content */}
-  {isOpen && (
-    <div className="flex text-2xl flex-col items-center space-y-8 py-8 px-4 ">
-      <Link to="/" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Home</Link>
-      <Link to="/product" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Product</Link>
-      <Link to="/pricing" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Pricing</Link>
-      <Link to="/contact" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Contact</Link>
+        {/* Mobile Dropdown Content */}
+        {isOpen && (
+          <div className="flex flex-col items-center space-y-8 py-8 px-4 text-2xl">
+            <Link to="/" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Home</Link>
+            <Link to="/product" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Product</Link>
+            <Link to="/pricing" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Pricing</Link>
+            <Link to="/contact" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Contact</Link>
           </div>
         )}
       </div>
