@@ -6,6 +6,8 @@ import SecondBestseller from "../components/SecondBestseller";
 import Popular from "../components/Popular";
 import SecondPopular from "../components/SecondPopular";
 import BestsellerProducts from "../components/BestsellerProducts";
+import Brands from "../components/Brands";
+import FeaturedPosts from "../components/FeaturedPosts";
 
 export default function PageContent() {
   return (
@@ -17,6 +19,8 @@ export default function PageContent() {
       <SecondBestseller />
       <SecondPopular />
       <BestsellerProducts />
+      <Brands />
+      <FeaturedPosts />
     </main>
   );
 }
