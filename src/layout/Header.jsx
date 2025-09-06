@@ -4,7 +4,6 @@ import { ShoppingCart, Search, Menu, Heart, UserRound, ChevronDown } from "lucid
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false); // Mobil dropdown toggle
-  const [isShopOpen, setIsShopOpen] = useState(false); // Desktop Shop dropdown
 
   return (
     <header className="w-full shadow-md bg-white">
@@ -18,25 +17,7 @@ export default function Header() {
         {/* Desktop Menu */}
         <nav className="flex gap-6 text-[#737373] font-medium relative">
           <Link to="/">Home</Link>
-
-          {/* Shop Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setIsShopOpen(!isShopOpen)}
-              className="flex items-center gap-1"
-            >
-              Shop <ChevronDown className="w-4 h-4" />
-            </button>
-
-            {isShopOpen && (
-              <div className="absolute top-full left-0 bg-white shadow-md mt-1 rounded-md min-w-[150px] z-10">
-                <Link to="/shop/category1" className="block px-4 py-2 hover:bg-gray-100">Category 1</Link>
-                <Link to="/shop/category2" className="block px-4 py-2 hover:bg-gray-100">Category 2</Link>
-                <Link to="/shop/category3" className="block px-4 py-2 hover:bg-gray-100">Category 3</Link>
-              </div>
-            )}
-          </div>
-
+          <Link to="/shop">Shop</Link>
           <Link to="/about">About</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/contact">Contact</Link>
@@ -44,7 +25,7 @@ export default function Header() {
         </nav>
 
         {/* Right Side Icons */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-12">
           <Link to="/login" className="flex items-center gap-2 text-[#23A6F0] font-bold">
             <UserRound className="w-5 h-5" />
             Login / Register

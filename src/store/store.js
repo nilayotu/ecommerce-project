@@ -3,9 +3,9 @@ import { thunk } from "redux-thunk";
 import sliderReducer from "./sliderSlice";
 
 const rootReducer = combineReducers({
-  slider: sliderReducer,
+  slider: sliderReducer
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk)); // ✅ thunk middleware
 
 export default store;
