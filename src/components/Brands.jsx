@@ -1,5 +1,5 @@
 import React from "react";
-import { FaHooli, FaLyft, FaStripe, FaAws, FaReddit, FaPiedPiperHat } from "react-icons/fa";
+import { FaHooli, FaLyft, FaStripe, FaAws, FaPiedPiperHat, FaRedditAlien } from "react-icons/fa";
 
 
 export default function Brands() {
@@ -9,7 +9,7 @@ export default function Brands() {
     { id: 3, icon: <FaPiedPiperHat size={120} />, link: "https://www.piedpiperhat.com" },
     { id: 4, icon: <FaStripe size={120} />, link: "https://stripe.com" },
     { id: 5, icon: <FaAws size={120} />, link: "https://aws.amazon.com" },
-    { id: 6, icon: <FaReddit size={120} />, link: "https://www.reddit.com" },
+    { id: 6, icon: <FaRedditAlien size={120} />, link: "https://www.reddit.com" },
   ];
 
   return (
