@@ -1,14 +1,15 @@
 import React from "react";
-import { FaLyft, FaStripe, FaAws, FaReddit } from "react-icons/fa";
-import { SiLeaflet } from "react-icons/si";
+import { FaHooli, FaLyft, FaStripe, FaAws, FaReddit, FaPiedPiperHat } from "react-icons/fa";
+
 
 export default function Brands() {
   const brands = [
-    { id: 1, icon: <FaLyft size={120} />, link: "https://www.lyft.com" },
-    { id: 2, icon: <SiLeaflet size={120} />, link: "https://leafletjs.com" },
-    { id: 3, icon: <FaStripe size={120} />, link: "https://stripe.com" },
-    { id: 4, icon: <FaAws size={120} />, link: "https://aws.amazon.com" },
-    { id: 5, icon: <FaReddit size={120} />, link: "https://www.reddit.com" },
+    { id: 1, icon: <FaHooli size={120} />, link: "https://www.hooli.com" },
+    { id: 2, icon: <FaLyft size={120} />, link: "https://www.lyft.com" },
+    { id: 3, icon: <FaPiedPiperHat size={120} />, link: "https://www.piedpiperhat.com" },
+    { id: 4, icon: <FaStripe size={120} />, link: "https://stripe.com" },
+    { id: 5, icon: <FaAws size={120} />, link: "https://aws.amazon.com" },
+    { id: 6, icon: <FaReddit size={120} />, link: "https://www.reddit.com" },
   ];
 
   return (
