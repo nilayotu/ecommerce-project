@@ -7,7 +7,13 @@ const initialState = {
       img: "/assets/first-slider.jpg",
       btnText: "Start Now",
     },
-    // ileride buraya başka slider item'ları da eklenebilir
+    {
+      id: 2,
+      title: "GROCERIES DELIVERY",
+      desc: "We know how large objects will act, but things on a small scale.",
+      img: "/assets/first-slider.jpg", // aynı görsel olabilir
+      btnText: "Start Now",
+    },
   ],
 };
 

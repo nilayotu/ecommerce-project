@@ -1,7 +1,7 @@
 import { legacy_createStore as createStore, combineReducers, applyMiddleware } from "redux";
 import { thunk } from "redux-thunk";
-import sliderReducer from "./sliderSlice";
-import productReducer from "./productReducer"; // ✅ bizim reducer
+import sliderReducer from "./sliderReducer";
+import productReducer from "./productReducer";
 
 const rootReducer = combineReducers({
   slider: sliderReducer,
