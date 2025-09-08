@@ -1,9 +1,22 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import { ShoppingCart, Search, Menu, Heart, UserRound, ChevronDown } from "lucide-react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false); // Mobil dropdown toggle
+  const [isSearchOpen, setIsSearchOpen] = useState(false); // Search bar toggle
+  const [query, setQuery] = useState(""); // Arama terimi
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (query.trim()) {
+      // yönlendirme yapıyoruz
+      window.location.href = `/search?query=${encodeURIComponent(query)}`;
+      setIsSearchOpen(false);
+      setQuery("");
+    }
+  };
+
 
   return (
     <header className="w-full shadow-md bg-white">
@@ -30,7 +43,40 @@ export default function Header() {
             <UserRound className="w-5 h-5" />
             Login / Register
           </Link>
-          <Search className="w-5 h-5 cursor-pointer text-[#23A6F0]" />
+
+
+          {/* Search */}
+          <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
+            <Search className="w-5 h-5 cursor-pointer text-[#23A6F0]" />
+          </button>
+
+          {/* Desktop Search Bar */}
+      {isSearchOpen && (
+        <div className="hidden md:block bg-gray-50 py-3">
+          <div className="container mx-auto px-4">
+            <form
+              onSubmit={handleSearch}
+              className="flex max-w-xl mx-auto"
+            >
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search products..."
+                className="flex-1 px-4 py-2 border rounded-l-md outline-none"
+              />
+              <button
+                type="submit"
+                className="bg-[#23A6F0] text-white px-6 rounded-r-md"
+              >
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+
           <ShoppingCart className="w-5 h-5 cursor-pointer text-[#23A6F0]" />
           <Heart className="w-5 h-5 cursor-pointer text-[#23A6F0]" />
         </div>
@@ -47,7 +93,31 @@ export default function Header() {
           {/* Icons */}
           <div className="flex items-center gap-4">
             <UserRound className="w-5 h-5 text-[#252B42]" />
-            <Search className="w-5 h-5 text-[#252B42]" />
+
+            {/* Mobile Search Bar */}
+        {isSearchOpen && (
+          <div className="px-4 pb-4">
+            <form
+              onSubmit={handleSearch}
+              className="flex w-full"
+            >
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search..."
+                className="flex-1 px-3 py-2 border rounded-l-md outline-none"
+              />
+              <button
+                type="submit"
+                className="bg-[#23A6F0] text-white px-4 rounded-r-md"
+              >
+                Go
+              </button>
+            </form>
+          </div>
+        )}
+
             <ShoppingCart className="w-5 h-5 text-[#252B42]" />
             {/* Dropdown toggle */}
             <button onClick={() => setIsOpen(!isOpen)}>
