@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentPage } from "../store/productReducer";
+import { Link } from "react-router-dom";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,8 @@ const ProductList = () => {
   }
 >
         {paginatedProducts.map((item) => (
-          <div
+          <Link
+          to={`/product/${item.id}`}
   key={item.id}
   className={
     viewMode === "grid"
@@ -68,7 +70,7 @@ const ProductList = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

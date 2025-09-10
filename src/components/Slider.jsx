@@ -41,20 +41,20 @@ export default function Slider() {
           <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
           {/* Slider İçerik */}
-          <div className="relative z-20 text-center text-white px-4">
-            <h2 className="text-3xl sm:text-3xl md:text-8xl font-semibold md:font-bold mb-2 sm:mb-4">
-              {item.title}
-            </h2>
-            <p className="md:mb-12 sm:mb-8 mt-4 sm:mt-6 max-w-xl md:max-w-4xl mx-auto px-8 font-semibold text-md sm:text-base md:text-3xl">
-              {isMobile ? item.desc : item.desc + " just do not act that way."}
-            </p>
-            <Link
-              to="/shop"
-              className="bg-[#23A6F0] text-white md:px-16 md:text-4xl md:py-4 px-10 py-4 sm:px-6 rounded font-bold text-md sm:text-base"
-            >
-              {item.btnText}
-            </Link>
-          </div>
+          <div className="relative z-20 text-center text-white px-4 flex flex-col items-center gap-6">
+          <h2 className="text-3xl sm:text-3xl md:text-8xl font-semibold md:font-bold mb-2 sm:mb-4">
+            {item.title}
+          </h2>
+          <p className="md:mb-12 sm:mb-8 mt-4 sm:mt-6 max-w-xl md:max-w-4xl mx-auto px-8 font-semibold text-md sm:text-base md:text-3xl">
+            {isMobile ? item.desc : item.desc + " just do not act that way."}
+          </p>
+          <Link
+            to="/shop"
+            className="bg-[#23A6F0] text-white rounded font-bold px-10 py-4 sm:px-4 md:px-16 md:py-4 text-md sm:text-base md:text-4xl"
+          >
+            {item.btnText}
+          </Link>
+        </div>
         </div>
       ))}
 

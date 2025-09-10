@@ -1,22 +1,25 @@
 import React, { useState } from "react";
-import { Link,  } from "react-router-dom";
-import { ShoppingCart, Search, Menu, Heart, UserRound, ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom"; // yönlendirme sadece menü linkleri için
+import { ShoppingCart, Search, Menu, Heart, UserRound } from "lucide-react";
+import { useSelector } from "react-redux";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false); // Mobil dropdown toggle
-  const [isSearchOpen, setIsSearchOpen] = useState(false); // Search bar toggle
-  const [query, setQuery] = useState(""); // Arama terimi
+  const [isOpen, setIsOpen] = useState(false); // Mobil menü
+  const [isSearchOpen, setIsSearchOpen] = useState(false); // Search bar
+  const [query, setQuery] = useState(""); // Input state
+
+  // ✅ count değerleri sadece sayı
+  const cartCount = useSelector((state) => state.cart.items.length);
+  const wishlistCount = useSelector((state) => state.wishlist.items.length);
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      // yönlendirme yapıyoruz
-      window.location.href = `/search?query=${encodeURIComponent(query)}`;
+      console.log("Search:", query); // sadece console.log
       setIsSearchOpen(false);
       setQuery("");
     }
   };
-
 
   return (
     <header className="w-full shadow-md bg-white">
@@ -38,26 +41,44 @@ export default function Header() {
         </nav>
 
         {/* Right Side Icons */}
-        <div className="flex items-center gap-12">
-          <Link to="/login" className="flex items-center gap-2 text-[#23A6F0] font-bold">
+        <div className="flex items-center gap-12 text-[#23A6F0]">
+          <div className="flex items-center gap-2 font-bold">
             <UserRound className="w-5 h-5" />
             Login / Register
-          </Link>
+          </div>
 
-
-          {/* Search */}
+          {/* Search toggle */}
           <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
-            <Search className="w-5 h-5 cursor-pointer text-[#23A6F0]" />
+            <Search className="w-5 h-5 cursor-pointer" />
           </button>
 
-          {/* Desktop Search Bar */}
+          {/* Cart */}
+          <div className="relative flex items-center gap-1">
+            <ShoppingCart className="w-5 h-5 text-[#23A6F0]" />
+            {cartCount > 0 && (
+              <span className="text-sm text-[#23A6F0] font-semibold">
+                {cartCount}
+              </span>
+            )}
+          </div>
+
+          {/* Wishlist */}
+          <div className="relative flex items-center">
+            <Heart className="w-5 h-5 text-[#23A6F0]" />
+            {wishlistCount > 0 && (
+              <span className="text-sm text-[#23A6F0] font-semibold">
+                {wishlistCount}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Search Bar */}
       {isSearchOpen && (
         <div className="hidden md:block bg-gray-50 py-3">
           <div className="container mx-auto px-4">
-            <form
-              onSubmit={handleSearch}
-              className="flex max-w-xl mx-auto"
-            >
+            <form onSubmit={handleSearch} className="flex max-w-xl mx-auto">
               <input
                 type="text"
                 value={query}
@@ -76,63 +97,98 @@ export default function Header() {
         </div>
       )}
 
-
-          <ShoppingCart className="w-5 h-5 cursor-pointer text-[#23A6F0]" />
-          <Heart className="w-5 h-5 cursor-pointer text-[#23A6F0]" />
-        </div>
-      </div>
-
       {/* Mobile Header */}
       <div className="md:hidden flex flex-col bg-white">
-        <div className="flex items-center justify-between px-8 py-6">
-          {/* Logo */}
+        {/* Top bar */}
+        <div className="flex items-center justify-between px-6 py-4">
           <Link to="/" className="text-xl font-bold text-[#252B42]">
             Bandage
           </Link>
 
-          {/* Icons */}
-          <div className="flex items-center gap-4">
-            <UserRound className="w-5 h-5 text-[#252B42]" />
+          <button onClick={() => setIsOpen(!isOpen)}>
+            <Menu className="w-6 h-6 text-[#252B42]" />
+          </button>
+        </div>
 
-            {/* Mobile Search Bar */}
+        {/* Dropdown Content */}
+        {isOpen && (
+          <div className="flex flex-col items-center space-y-8 py-8 px-4 text-lg">
+            {/* Navigation Links */}
+            <div className="flex text-2xl flex-col items-center space-y-6">
+              <Link to="/" className="text-[#737373] hover:text-[#23A6F0]">
+                Home
+              </Link>
+              <Link to="/shop" className="text-[#737373] hover:text-[#23A6F0]">
+                Shop
+              </Link>
+              <Link to="/about" className="text-[#737373] hover:text-[#23A6F0]">
+                About
+              </Link>
+              <Link to="/blog" className="text-[#737373] hover:text-[#23A6F0]">
+                Blog
+              </Link>
+              <Link to="/contact" className="text-[#737373] hover:text-[#23A6F0]">
+                Contact
+              </Link>
+              <Link to="/pages" className="text-[#737373] hover:text-[#23A6F0]">
+                Pages
+              </Link>
+            </div>
+
+            {/* User */}
+            <div className="flex items-center gap-2 text-[#23A6F0]">
+              <UserRound className="w-8 h-8" />
+              <span className="text-2xl">Login / Register</span>
+            </div>
+
+            {/* Search, Cart, Wishlist */}
+            <div className="flex flex-col items-center gap-8 text-[#23A6F0]">
+              {/* Search */}
+              <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
+                <Search className="w-8 h-8" />
+              </button>
+
+              {/* Cart */}
+              <div className="relative flex items-center gap-2">
+                <ShoppingCart className="w-8 h-8 text-[#23A6F0]" />
+                {cartCount > 0 && (
+                  <span className="text-lg text-[#23A6F0] font-semibold">
+                    {cartCount}
+                  </span>
+                )}
+              </div>
+
+              {/* Wishlist */}
+              <div className="relative flex items-center gap-2">
+                <Heart className="w-8 h-8 text-[#23A6F0]" />
+                {wishlistCount > 0 && (
+                  <span className="text-lg text-[#23A6F0] font-semibold">
+                    {wishlistCount}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile Search Bar */}
         {isSearchOpen && (
-          <div className="px-4 pb-4">
-            <form
-              onSubmit={handleSearch}
-              className="flex w-full"
-            >
+          <div className="md:hidden bg-gray-50 py-3 px-4">
+            <form onSubmit={handleSearch} className="flex max-w-md mx-auto">
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search..."
-                className="flex-1 px-3 py-2 border rounded-l-md outline-none"
+                placeholder="Search products..."
+                className="flex-1 px-4 py-2 border rounded-l-md outline-none"
               />
               <button
                 type="submit"
-                className="bg-[#23A6F0] text-white px-4 rounded-r-md"
+                className="bg-[#23A6F0] text-white px-6 rounded-r-md"
               >
-                Go
+                Search
               </button>
             </form>
-          </div>
-        )}
-
-            <ShoppingCart className="w-5 h-5 text-[#252B42]" />
-            {/* Dropdown toggle */}
-            <button onClick={() => setIsOpen(!isOpen)}>
-              <Menu className="w-6 h-6 text-[#252B42]" />
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Dropdown Content */}
-        {isOpen && (
-          <div className="flex flex-col items-center space-y-8 py-8 px-4 text-2xl">
-            <Link to="/" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Home</Link>
-            <Link to="/product" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Product</Link>
-            <Link to="/pricing" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Pricing</Link>
-            <Link to="/contact" className="text-[#737373] hover:text-[#23A6F0] font-semibold">Contact</Link>
           </div>
         )}
       </div>

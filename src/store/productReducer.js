@@ -149,6 +149,8 @@ const initialState = {
   itemsPerPage: 12,
   viewMode: "grid", // grid | list
   sortBy: "popularity", // popularity | lowToHigh | highToLow | newest
+  wishlist: [],
+  cart: [],
 };
 
 // Action types
@@ -156,6 +158,8 @@ const SET_PRODUCTS = "SET_PRODUCTS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_VIEW_MODE = "SET_VIEW_MODE";
 const SET_SORT_BY = "SET_SORT_BY";
+const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
+const ADD_TO_CART = "ADD_TO_CART";
 
 // Reducer
 export default function productReducer(state = initialState, action) {
@@ -190,6 +194,13 @@ export default function productReducer(state = initialState, action) {
         products: sortedProducts,
       };
     }
+
+    case ADD_TO_WISHLIST:
+      return { ...state, wishlist: [...state.wishlist, action.payload] };
+
+    case ADD_TO_CART:
+      return { ...state, cart: [...state.cart, action.payload] };
+
     default:
       return state;
   }
@@ -214,4 +225,13 @@ export const setViewMode = (mode) => ({
 export const setSortBy = (sortType) => ({
   type: SET_SORT_BY,
   payload: sortType,
+});
+export const addToWishlist = (product) => ({ 
+  type: ADD_TO_WISHLIST, 
+  payload: product 
+});
+
+export const addToCart = (product) => ({ 
+  type: ADD_TO_CART, 
+  payload: product 
 });
