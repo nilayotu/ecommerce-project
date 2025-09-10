@@ -18,7 +18,7 @@ export default function ProductTabs() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`pb-4 text-lg font-medium ${
+            className={`pb-4 text-sm md:text-lg font-medium ${
               activeTab === tab.id
                 ? "text-[#252B42] border-b-2 border-[#23A6F0]"
                 : "text-[#737373]"
@@ -32,7 +32,7 @@ export default function ProductTabs() {
       {/* Tab Content */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
         {/* Left Image */}
-        <div className="col-span-1 flex justify-end">
+        <div className="col-span-1 flex justify-center md:justify-end">
           <img
             src="/assets/furniture-1.jpg" // kendi görsel yolunu koy
             alt="tab-image"
@@ -41,7 +41,7 @@ export default function ProductTabs() {
         </div>
 
         {/* Middle Text */}
-        <div className="col-span-1 flex flex-col gap-12">
+        <div className="col-span-1 flex flex-col gap-12 px-8">
           <h3 className="text-2xl font-bold text-[#252B42]">
             the quick fox jumps over
           </h3>
@@ -63,11 +63,11 @@ export default function ProductTabs() {
         </div>
 
         {/* Right List */}
-        <div className="col-span-1 flex flex-col gap-12">
+        <div className="col-span-1 flex flex-col gap-12 px-8">
           <div>
             <h3 className="text-2xl font-bold text-[#252B42]">
-              the quick fox jumps over
-            </h3>
+            the quick fox jumps over
+          </h3>
             <ul className="mt-3 text-[#737373] font-bold space-y-2">
               <li className="flex items-center gap-2">
                 <ChevronRight size={32} /> the quick fox jumps over the lazy dog
@@ -85,7 +85,7 @@ export default function ProductTabs() {
           </div>
 
           <div>
-            <h3 className="text-xl font-bold text-[#252B42]">
+            <h3 className="text-2xl font-bold text-[#252B42]">
               the quick fox jumps over
             </h3>
             <ul className="mt-3 text-[#737373] font-bold space-y-4">
