@@ -32,7 +32,7 @@ export default function Footer() {
         <div>
           <h3 className="font-bold mb-3 md:mb-4 text-sm md:text-xl">Company Info</h3>
           <ul className="space-y-2 md:space-y-4 text-xs md:text-lg">
-            <li><Link to="/about" className="hover:text-[#23A6F0]">About Us</Link></li>
+            <li><Link to="/aboutUs" className="hover:text-[#23A6F0]">About Us</Link></li>
             <li><Link to="/career" className="hover:text-[#23A6F0]">Career</Link></li>
             <li><Link to="/hiring" className="hover:text-[#23A6F0]">We are hiring</Link></li>
             <li><Link to="/blog" className="hover:text-[#23A6F0]">Blog</Link></li>
@@ -42,7 +42,7 @@ export default function Footer() {
         <div>
           <h3 className="font-bold mb-3 md:mb-4 text-sm md:text-xl">Legal</h3>
           <ul className="space-y-2 md:space-y-4 text-xs md:text-lg">
-            <li><Link to="/legal/about" className="hover:text-[#23A6F0]">About Us</Link></li>
+            <li><Link to="/aboutUs" className="hover:text-[#23A6F0]">About Us</Link></li>
             <li><Link to="/legal/career" className="hover:text-[#23A6F0]">Career</Link></li>
             <li><Link to="/legal/hiring" className="hover:text-[#23A6F0]">We are hiring</Link></li>
             <li><Link to="/legal/blog" className="hover:text-[#23A6F0]">Blog</Link></li>

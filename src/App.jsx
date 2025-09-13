@@ -4,6 +4,7 @@ import ShopPage from "./pages/ShopPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ContactPage from "./pages/ContactPage";
 import TeamPage from "./pages/TeamPage";
+import AboutUsPage from "./pages/AboutUsPage";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/product/:id" component={ProductDetailPage} />
         <Route path="/contact" component={ContactPage} />
         <Route path="/team" component={TeamPage} />
+        <Route path="/aboutUs" component={AboutUsPage} />
       </Switch>
     </BrowserRouter>
   );
