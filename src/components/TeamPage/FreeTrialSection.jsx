@@ -11,7 +11,7 @@ const FreeTrialSection = () => {
         </h2>
 
         {/* Açıklama */}
-        <p className="text-[#737373] text-md font-semibold max-w-xl mx-auto px-16 mt-6 mb-6">
+        <p className="text-[#737373] text-md font-semibold max-w-xl mx-auto md:px-16 mt-6 mb-6">
           Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
           RELIT official consequent.
         </p>
