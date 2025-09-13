@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentPage } from "../store/productReducer";
+import { setCurrentPage } from "../../store/productReducer";
 import { Link } from "react-router-dom";
 
 const ProductList = () => {

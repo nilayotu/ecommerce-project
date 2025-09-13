@@ -1,9 +1,9 @@
 import React from "react";
-import Breadcrumb from "../components/Breadcrumb";
-import ShopCategories from "../components/ShopCategories";
-import FilterBar from "../components/FilterBar";
-import ProductList from "../components/ProductList";
-import Brands from "../components/Brands";
+import Breadcrumb from "../components/ShopPage/Breadcrumb";
+import ShopCategories from "../components/ShopPage/ShopCategories";
+import FilterBar from "../components/ShopPage/FilterBar";
+import ProductList from "../components/ShopPage/ProductList";
+import Brands from "../components/HomePage/Brands";
 
 export default function ShopPageContent() {
     return (

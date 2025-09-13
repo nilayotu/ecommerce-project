@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { categories as mockCategories } from "../store/categories";
-import CategoryCard from "./CategoryCard";
+import { categories as mockCategories } from "../../store/categories";
+import CategoryCard from "../CategoryCard";
 
 export default function ShopCategories() {
   const [categories, setCategories] = useState([]);

@@ -1,7 +1,7 @@
 import React from "react";
 import { LayoutGrid, List } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
-import { setViewMode, setSortBy } from "../store/productReducer";
+import { setViewMode, setSortBy } from "../../store/productReducer";
 
 export default function FilterBar() {
   const dispatch = useDispatch();

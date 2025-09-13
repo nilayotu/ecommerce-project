@@ -1,9 +1,9 @@
 import React from "react";
-import Breadcrumb from "../components/Breadcrumb";
-import ProductDetailsById from "../components/ProductDetailsById";
-import ProductTabs from "../components/ProductTabs";
-import BestSellerProducts from "../components/BestsellerProducts";
-import Brands from "../components/Brands";
+import Breadcrumb from "../components/ShopPage/Breadcrumb";
+import ProductDetailsById from "../components/ProductDetailPage/ProductDetailsById";
+import ProductTabs from "../components/ProductDetailPage/ProductTabs";
+import BestSellerProducts from "../components/HomePage/BestsellerProducts";
+import Brands from "../components/HomePage/Brands";
 
 export default function ProductDetailPageContent() {
     return (

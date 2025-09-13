@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { ChevronLeft, ChevronRight, Eye, Heart, ShoppingCart, Star } from "lucide-react";
-import { addToCart } from "../store/cartSlice";
-import { addToWishlist } from "../store/wishlistSlice";
+import { addToCart } from "../../store/cartSlice";
+import { addToWishlist } from "../../store/wishlistSlice";
 
 export default function ProductDetailsById() {
   const { id } = useParams();

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { products } from "../store/bestSeller";
+import { products } from "../../store/bestSeller";
 
 export default function SecondBestseller(){
   const [isMobile, setIsMobile] = useState(false);

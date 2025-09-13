@@ -1,15 +1,15 @@
 import React from "react";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
-import PageContent from "../layout/PageContent";
+import TeamPageContent from "../layout/TeamPageContent";
 
-export default function HomePage() {
+
+
+export default function TeamPage() {
   return (
     <>
       <Header />
-      <main className="flex-1">
-        <PageContent />
-      </main>
+      <TeamPageContent />
       <Footer />
     </>
   );
