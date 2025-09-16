@@ -44,9 +44,11 @@ export default function Header() {
         {/* Right Side Icons */}
         <div className="flex items-center gap-12 text-[#23A6F0]">
           <div className="flex items-center gap-2 font-bold">
-            <UserRound className="w-5 h-5" />
+          <UserRound className="w-5 h-5" />
+          <Link to="/signup">
             Login / Register
-          </div>
+          </Link>
+        </div>
 
           {/* Search toggle */}
           <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
