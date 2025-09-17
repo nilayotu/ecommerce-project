@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentPage } from "../../store/productReducer";
+import { setCurrentPage } from "../../store/reducers/catalogReducer";
 import { Link } from "react-router-dom";
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const { products, currentPage, itemsPerPage, viewMode } = useSelector(
-    (state) => state.products
-  );
+  (state) => state.catalog
+);
 
   const totalPages = Math.ceil(products.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;

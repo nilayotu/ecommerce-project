@@ -9,8 +9,8 @@ export default function ProductDetailsById() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector((state) =>
-    state.products.products.find((p) => p.id === parseInt(id))
-  );
+  state.catalog.products.find((p) => p.id === parseInt(id))
+);
 
   // Hook'lar her zaman en üstte
   const [selectedIndex, setSelectedIndex] = useState(0);

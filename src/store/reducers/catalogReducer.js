@@ -162,7 +162,7 @@ const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
 const ADD_TO_CART = "ADD_TO_CART";
 
 // Reducer
-export default function productReducer(state = initialState, action) {
+export default function catalogReducer(state = initialState, action) {
   switch (action.type) {
     case SET_PRODUCTS:
       return {

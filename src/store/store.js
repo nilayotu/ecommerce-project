@@ -1,17 +1,25 @@
+// src/store/store.js
 import { legacy_createStore as createStore, combineReducers, applyMiddleware } from "redux";
 import { thunk } from "redux-thunk";
-import sliderReducer from "./sliderReducer";
-import productReducer from "./productReducer";
-import cartReducer from "./cartSlice";
-import wishlistReducer from "./wishlistSlice";
+import logger from "redux-logger";
 
+// Reducer'larını import et
+import clientReducer from "./reducers/clientReducer";
+import productReducer from "./reducers/productReducer";
+import shoppingCartReducer from "./reducers/shoppingCartReducer";
+import catalogReducer from "./reducers/catalogReducer";
+import sliderReducer from "./reducers/sliderReducer";
+
+// Reducer'ları birleştir
 const rootReducer = combineReducers({
   slider: sliderReducer,
-  products: productReducer, // ✅ eklendi
-  cart: cartReducer,
-  wishlist: wishlistReducer,
+  client: clientReducer,
+  products: productReducer,
+  catalog: catalogReducer,
+  shoppingCart: shoppingCartReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+// Middleware ekle (thunk + logger)
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 export default store;

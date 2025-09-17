@@ -8,9 +8,8 @@ export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Search bar
   const [query, setQuery] = useState(""); // Input state
 
-  // ✅ count değerleri sadece sayı
-  const cartCount = useSelector((state) => state.cart.items.length);
-  const wishlistCount = useSelector((state) => state.wishlist.items.length);
+const cartCount = useSelector((state) => state.shoppingCart.cart.length);
+const wishlistCount = useSelector((state) => state.wishlist?.items?.length || 0);
 
   const handleSearch = (e) => {
     e.preventDefault();

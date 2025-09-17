@@ -14,6 +14,7 @@ const SignupPage = () => {
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -26,18 +27,21 @@ const SignupPage = () => {
       .get("/roles")
       .then((res) => {
         setRoles(res.data);
+
+        // Customer varsayılan seçili olsun
+        const customerRole = res.data.find((r) => r.name === "Customer");
+        if (customerRole) setValue("role_id", customerRole.id);
       })
       .catch((err) => {
         console.error("Roles fetch error:", err);
       });
-  }, []);
+  }, [setValue]);
 
   const onSubmit = async (data) => {
     setLoading(true);
     setErrorMessage("");
 
     try {
-      // Eğer Store seçildiyse store alanlarını ekle
       let payload = {
         name: data.name,
         email: data.email,
@@ -45,7 +49,7 @@ const SignupPage = () => {
         role_id: Number(data.role_id),
       };
 
-      // Store id’si örnek: 2 (backend’e göre değişebilir)
+      // Eğer Store seçildiyse store alanlarını ekle
       if (Number(data.role_id) === 2) {
         payload.store = {
           name: data.storeName,
@@ -120,8 +124,7 @@ const SignupPage = () => {
             {...register("password", {
               required: true,
               pattern: {
-                value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
                 message:
                   "Min 8 chars, include upper, lower, number, special char",
               },
@@ -129,9 +132,7 @@ const SignupPage = () => {
             className="w-full border p-2 rounded"
           />
           {errors.password && (
-            <span className="text-red-500 text-sm">
-              {errors.password.message}
-            </span>
+            <span className="text-red-500 text-sm">{errors.password.message}</span>
           )}
         </div>
 
@@ -158,7 +159,6 @@ const SignupPage = () => {
           <select
             {...register("role_id")}
             className="w-full border p-2 rounded"
-            defaultValue={roles.find((r) => r.name === "Customer")?.id || ""}
           >
             {roles.map((role) => (
               <option key={role.id} value={role.id}>
