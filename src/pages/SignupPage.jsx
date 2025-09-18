@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRolesIfNeeded } from "../store/thunks/clientThunks";
 import api from "../store/api";
 
 const SignupPage = () => {
   const history = useHistory();
-  const [roles, setRoles] = useState([]);
+  const dispatch = useDispatch();
+
+  // ✅ Roller Redux'tan alınıyor
+  const roles = useSelector((state) => state.client.roles);
+
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -21,21 +27,18 @@ const SignupPage = () => {
   const password = watch("password");
   const selectedRole = watch("role_id");
 
-  // Roller çekiliyor
+  // Roller ilk render’da yükleniyor
   useEffect(() => {
-    api
-      .get("/roles")
-      .then((res) => {
-        setRoles(res.data);
+    dispatch(fetchRolesIfNeeded());
+  }, [dispatch]);
 
-        // Customer varsayılan seçili olsun
-        const customerRole = res.data.find((r) => r.name === "Customer");
-        if (customerRole) setValue("role_id", customerRole.id);
-      })
-      .catch((err) => {
-        console.error("Roles fetch error:", err);
-      });
-  }, [setValue]);
+  // Roller geldikten sonra varsayılan CUSTOMER seçelim
+  useEffect(() => {
+    if (roles.length > 0) {
+      const customerRole = roles.find((r) => r.toUpperCase() === "CUSTOMER");
+      if (customerRole) setValue("role_id", customerRole);
+    }
+  }, [roles, setValue]);
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -46,11 +49,10 @@ const SignupPage = () => {
         name: data.name,
         email: data.email,
         password: data.password,
-        role_id: Number(data.role_id),
+        role_id: data.role_id, // role_id string geliyor (CUSTOMER/SELLER/ADMIN)
       };
 
-      // Eğer Store seçildiyse store alanlarını ekle
-      if (Number(data.role_id) === 2) {
+      if (data.role_id === "SELLER") {
         payload.store = {
           name: data.storeName,
           phone: data.storePhone,
@@ -61,7 +63,6 @@ const SignupPage = () => {
 
       await api.post("/signup", payload);
 
-      // Başarılı ise redirect
       alert("You need to click link in email to activate your account!");
       history.goBack();
       reset();
@@ -132,7 +133,9 @@ const SignupPage = () => {
             className="w-full border p-2 rounded"
           />
           {errors.password && (
-            <span className="text-red-500 text-sm">{errors.password.message}</span>
+            <span className="text-red-500 text-sm">
+              {errors.password.message}
+            </span>
           )}
         </div>
 
@@ -156,20 +159,17 @@ const SignupPage = () => {
 
         {/* Role */}
         <div>
-          <select
-            {...register("role_id")}
-            className="w-full border p-2 rounded"
-          >
-            {roles.map((role) => (
-              <option key={role.id} value={role.id}>
-                {role.name}
+          <select {...register("role_id")} className="w-full border p-2 rounded">
+            {roles.map((role, idx) => (
+              <option key={idx} value={role}>
+                {role}
               </option>
             ))}
           </select>
         </div>
 
-        {/* Eğer Store seçildiyse ek alanlar (id = 2) */}
-        {Number(selectedRole) === 2 && (
+        {/* Seller alanları */}
+        {selectedRole === "SELLER" && (
           <div className="space-y-4 border p-4 rounded bg-gray-50">
             <div>
               <input
