@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; // yönlendirme sadece menü linkleri için
 import { ShoppingCart, Search, Menu, Heart, UserRound } from "lucide-react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import Gravatar from "react-gravatar";
+import { logoutUserThunk } from "../store/thunks/clientThunks";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false); // Mobil menü
@@ -10,6 +12,9 @@ export default function Header() {
 
 const cartCount = useSelector((state) => state.shoppingCart.cart.length);
 const wishlistCount = useSelector((state) => state.wishlist?.items?.length || 0);
+const user = useSelector((state) => state.client.user);
+
+const dispatch = useDispatch();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -18,6 +23,10 @@ const wishlistCount = useSelector((state) => state.wishlist?.items?.length || 0)
       setIsSearchOpen(false);
       setQuery("");
     }
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutUserThunk());
   };
 
   return (
@@ -42,12 +51,23 @@ const wishlistCount = useSelector((state) => state.wishlist?.items?.length || 0)
 
         {/* Right Side Icons */}
         <div className="flex items-center gap-12 text-[#23A6F0]">
-          <div className="flex items-center gap-2 font-bold">
-          <UserRound className="w-5 h-5" />
-          <Link to="/signup">
-            Login / Register
-          </Link>
-        </div>
+          {user ? (
+            <div className="flex items-center gap-3">
+              <Gravatar email={user.email} size={32} className="rounded-full" />
+              <span className="font-bold text-[#252B42]">{user.name}</span>
+              <button
+                onClick={handleLogout}
+                className="text-sm text-red-500 hover:underline"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 font-bold">
+              <UserRound className="w-5 h-5" />
+              <Link to="/auth">Login / Register</Link>
+            </div>
+          )}
 
           {/* Search toggle */}
           <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
@@ -137,11 +157,24 @@ const wishlistCount = useSelector((state) => state.wishlist?.items?.length || 0)
               </Link>
             </div>
 
-            {/* User */}
-            <div className="flex items-center gap-2 text-[#23A6F0]">
-              <UserRound className="w-8 h-8" />
-              <span className="text-2xl">Login / Register</span>
-            </div>
+            {/*Mobile user info */}
+            {user ? (
+              <div className="flex flex-col items-center gap-3 text-[#252B42]">
+                <Gravatar email={user.email} size={48} className="rounded-full" />
+                <span className="font-bold">{user.name}</span>
+                <button
+                  onClick={handleLogout}
+                  className="text-red-500 text-sm hover:underline"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 text-[#23A6F0]">
+                <UserRound className="w-8 h-8" />
+                <Link to="/auth" className="text-2xl">Login / Register</Link>
+              </div>
+            )}
 
             {/* Search, Cart, Wishlist */}
             <div className="flex flex-col items-center gap-8 text-[#23A6F0]">

@@ -6,6 +6,8 @@ import ContactPage from "./pages/ContactPage";
 import TeamPage from "./pages/TeamPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import AuthPage from "./pages/AuthPage";
 
 export default function App() {
   return (
@@ -17,7 +19,7 @@ export default function App() {
         <Route path="/contact" component={ContactPage} />
         <Route path="/team" component={TeamPage} />
         <Route path="/aboutUs" component={AboutUsPage} />
-        <Route path="/signup" component={SignupPage} />
+        <Route path="/auth" component={AuthPage} />
       </Switch>
     </BrowserRouter>
   );
