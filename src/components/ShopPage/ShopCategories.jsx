@@ -6,7 +6,7 @@ export default function ShopCategories() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    // ileride burası API çağrısı olacak
+    // ileride API çağrısı olacak
     setCategories(mockCategories);
   }, []);
 

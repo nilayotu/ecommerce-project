@@ -52,3 +52,29 @@ export const logoutUserThunk = () => (dispatch) => {
   localStorage.removeItem("token");
   dispatch(clearUser());
 };
+
+export const verifyToken = () => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+
+  // Axios header’a token ekle (Bearer ekleme yok)
+  api.defaults.headers.common["Authorization"] = token;
+
+  try {
+    const response = await api.get("/auth/verify"); // Backend verify endpoint
+    const { name, email, role_id, token: newToken } = response.data;
+
+    dispatch(setUser({ name, email, role_id, token: newToken || token }));
+
+    // Token yenilenmişse localStorage ve axios header güncelle
+    if (newToken) {
+      localStorage.setItem("token", newToken);
+      api.defaults.headers.common["Authorization"] = newToken;
+    }
+  } catch (err) {
+    console.error("Token verification failed:", err.response?.data || err.message);
+    localStorage.removeItem("token");
+    delete api.defaults.headers.common["Authorization"];
+    dispatch(clearUser());
+  }
+};
