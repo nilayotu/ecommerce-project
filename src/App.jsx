@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { verifyToken } from "./store/thunks/clientThunks";
+import { fetchCategoriesThunk } from "./store/thunks/categoryThunks";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
@@ -15,6 +16,7 @@ export default function App() {
 
   useEffect(() => {
     dispatch(verifyToken());
+    dispatch(fetchCategoriesThunk());
   }, [dispatch]);
 
   return (

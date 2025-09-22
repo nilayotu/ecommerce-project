@@ -1,25 +1,33 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom"; // yönlendirme sadece menü linkleri için
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { ShoppingCart, Search, Menu, Heart, UserRound } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import Gravatar from "react-gravatar";
 import { logoutUserThunk } from "../store/thunks/clientThunks";
+import { fetchCategoriesThunk } from "../store/thunks/categoryThunks";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false); // Mobil menü
-  const [isSearchOpen, setIsSearchOpen] = useState(false); // Search bar
-  const [query, setQuery] = useState(""); // Input state
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const dispatch = useDispatch();
 
-const cartCount = useSelector((state) => state.shoppingCart.cart.length);
-const wishlistCount = useSelector((state) => state.wishlist?.items?.length || 0);
-const user = useSelector((state) => state.client.user);
+  const cartCount = useSelector((state) => state.shoppingCart.cart.length);
+  const wishlistCount = useSelector(
+    (state) => state.wishlist?.items?.length || 0
+  );
+  const user = useSelector((state) => state.client.user);
 
-const dispatch = useDispatch();
+  const { categories, loading, error } = useSelector((state) => state.category);
+
+  useEffect(() => {
+    dispatch(fetchCategoriesThunk());
+  }, [dispatch]);
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      console.log("Search:", query); // sadece console.log
+      console.log("Search:", query);
       setIsSearchOpen(false);
       setQuery("");
     }
@@ -28,6 +36,14 @@ const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logoutUserThunk());
   };
+
+  // Rating'e göre top 5 kategori
+  const topCategories = [...categories]
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 5);
+
+  // Gender mapping
+  const getGenderPath = (g) => (g === "k" ? "kadin" : "erkek");
 
   return (
     <header className="w-full shadow-md bg-white">
@@ -41,7 +57,51 @@ const dispatch = useDispatch();
         {/* Desktop Menu */}
         <nav className="flex gap-6 text-[#737373] font-medium relative">
           <Link to="/">Home</Link>
-          <Link to="/shop">Shop</Link>
+
+          {/* Shop Dropdown */}
+          <div className="relative group">
+            <span className="hover:text-[#23A6F0] cursor-pointer">Shop</span>
+            <div className="absolute left-0 top-full hidden group-hover:grid grid-cols-2 gap-12 bg-white shadow-lg p-8 w-[400px] z-50">
+              {/* Women */}
+              <div>
+                <h3 className="font-bold text-[#252B42] mb-6">Women</h3>
+                <ul className="flex flex-col gap-4">
+                  {categories
+                    .filter((cat) => cat.gender === "k")
+                    .map((cat) => (
+                      <li key={cat.id}>
+                        <Link
+                          to={`/shop/${getGenderPath(cat.gender)}/${cat.title.toLowerCase()}/${cat.id}`}
+                          className="hover:text-[#23A6F0] font-bold"
+                        >
+                          {cat.title}
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+
+              {/* Men */}
+              <div>
+                <h3 className="font-bold text-[#252B42] mb-6">Men</h3>
+                <ul className="flex flex-col gap-4">
+                  {categories
+                    .filter((cat) => cat.gender === "e")
+                    .map((cat) => (
+                      <li key={cat.id}>
+                        <Link
+                          to={`/shop/${getGenderPath(cat.gender)}/${cat.title.toLowerCase()}/${cat.id}`}
+                          className="hover:text-[#23A6F0] font-bold"
+                        >
+                          {cat.title}
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
           <Link to="/aboutUs">About</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/contact">Contact</Link>
@@ -140,10 +200,56 @@ const dispatch = useDispatch();
               <Link to="/" className="text-[#737373] hover:text-[#23A6F0]">
                 Home
               </Link>
-              <Link to="/shop" className="text-[#737373] hover:text-[#23A6F0]">
-                Shop
-              </Link>
-              <Link to="/about" className="text-[#737373] hover:text-[#23A6F0]">
+
+              {/* Mobile Shop with categories */}
+              <div className="flex flex-col items-center">
+                <span className="text-[#737373] font-bold">Shop</span>
+                <div className="flex gap-12 mt-4">
+                  {/* Women */}
+                  <div>
+                    <h3 className="font-bold text-[#252B42] mb-2 text-center">
+                      Women
+                    </h3>
+                    <ul className="flex flex-col gap-1">
+                      {categories
+                        .filter((cat) => cat.gender === "k")
+                        .map((cat) => (
+                          <li key={cat.id}>
+                            <Link
+                              to={`/shop/${getGenderPath(cat.gender)}/${cat.title.toLowerCase()}/${cat.id}`}
+                              className="text-[#737373] hover:text-[#23A6F0] font-bold"
+                            >
+                              {cat.title}
+                            </Link>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+
+                  {/* Men */}
+                  <div>
+                    <h3 className="font-bold text-[#252B42] mb-2 text-center">
+                      Men
+                    </h3>
+                    <ul className="flex flex-col gap-1">
+                      {categories
+                        .filter((cat) => cat.gender === "e")
+                        .map((cat) => (
+                          <li key={cat.id}>
+                            <Link
+                              to={`/shop/${getGenderPath(cat.gender)}/${cat.title.toLowerCase()}/${cat.id}`}
+                              className="text-[#737373] hover:text-[#23A6F0] font-bold"
+                            >
+                              {cat.title}
+                            </Link>
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <Link to="/aboutUs" className="text-[#737373] hover:text-[#23A6F0]">
                 About
               </Link>
               <Link to="/blog" className="text-[#737373] hover:text-[#23A6F0]">
@@ -155,9 +261,12 @@ const dispatch = useDispatch();
               <Link to="/pages" className="text-[#737373] hover:text-[#23A6F0]">
                 Pages
               </Link>
+              <Link to="/team" className="text-[#737373] hover:text-[#23A6F0]">
+                Team
+              </Link>
             </div>
 
-            {/*Mobile user info */}
+            {/* Mobile user info */}
             {user ? (
               <div className="flex flex-col items-center gap-3 text-[#252B42]">
                 <Gravatar email={user.email} size={48} className="rounded-full" />
@@ -172,7 +281,9 @@ const dispatch = useDispatch();
             ) : (
               <div className="flex items-center gap-2 text-[#23A6F0]">
                 <UserRound className="w-8 h-8" />
-                <Link to="/auth" className="text-2xl">Login / Register</Link>
+                <Link to="/auth" className="text-2xl">
+                  Login / Register
+                </Link>
               </div>
             )}
 

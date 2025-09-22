@@ -9,6 +9,7 @@ import BestsellerProducts from "../components/HomePage/BestsellerProducts";
 import Brands from "../components/HomePage/Brands";
 import FeaturedPosts from "../components/HomePage/FeaturedPosts";
 
+
 export default function PageContent() {
   return (
     <main>

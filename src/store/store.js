@@ -9,6 +9,7 @@ import productReducer from "./reducers/productReducer";
 import shoppingCartReducer from "./reducers/shoppingCartReducer";
 import catalogReducer from "./reducers/catalogReducer";
 import sliderReducer from "./reducers/sliderReducer";
+import categoryReducer from "./reducers/categoryReducer";
 
 // Reducer'ları birleştir
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   products: productReducer,
   catalog: catalogReducer,
   shoppingCart: shoppingCartReducer,
+  category: categoryReducer,
 });
 
 // Middleware ekle (thunk + logger)
