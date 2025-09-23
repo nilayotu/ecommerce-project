@@ -1,20 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentPage } from "../../store/reducers/catalogReducer";
-import { addToCart } from "../../store/reducers/shoppingCartReducer"; // ✅ eklendi
+import { addToCart } from "../../store/reducers/shoppingCartReducer";
 import { Link, useHistory } from "react-router-dom";
+import { fetchProductsThunk } from "../../store/thunks/productThunks";
 
 const ProductList = () => {
   const dispatch = useDispatch();
-  const { products, currentPage, itemsPerPage, viewMode } = useSelector(
-    (state) => state.catalog
-  );
-  const { user } = useSelector((state) => state.client); // ✅ login kontrolü için
   const history = useHistory();
 
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+  // productReducer’dan ürünler ve fetch state
+  const { productList, total, fetchState } = useSelector(
+    (state) => state.product
+  );
+  const { currentPage, itemsPerPage, viewMode } = useSelector(
+    (state) => state.catalog
+  );
+  const { user } = useSelector((state) => state.client);
+
+  // İlk açılışta ürünleri getir
+  useEffect(() => {
+    if (fetchState === "NOT_FETCHED") {
+      dispatch(fetchProductsThunk());
+    }
+  }, [dispatch, fetchState]);
+
+  // Loading ve error state
+  if (fetchState === "FETCHING") {
+    return <p className="text-center py-10">Loading...</p>;
+  }
+
+  if (fetchState === "FAILED") {
+    return (
+      <p className="text-center text-red-500 py-10">
+        Failed to load products.
+      </p>
+    );
+  }
+
+  // Sayfalama hesaplama
+  const totalPages = Math.ceil(total / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedProducts = products.slice(
+  const paginatedProducts = productList.slice(
     startIndex,
     startIndex + itemsPerPage
   );
@@ -27,7 +54,6 @@ const ProductList = () => {
 
   const handleAddToCart = (product) => {
     if (!user) {
-      // login yoksa auth sayfasına yönlendir
       history.push("/auth");
       return;
     }
@@ -70,15 +96,19 @@ const ProductList = () => {
               <h3 className="text-base text-[#252B42] font-bold">
                 {item.title}
               </h3>
-              <p className="text-[#737373] font-bold text-sm">{item.category}</p>
+              <p className="text-[#737373] font-bold text-sm">
+                {item.category}
+              </p>
               <div className="flex items-center gap-2 mt-2">
                 <span className="text-[#BDBDBD] font-bold">
                   ${item.oldPrice}
                 </span>
-                <span className="text-[#23856D] font-bold">${item.price}</span>
+                <span className="text-[#23856D] font-bold">
+                  ${item.price}
+                </span>
               </div>
               <div className="flex gap-2 mt-3">
-                {item.colors.map((color, idx) => (
+                {item.colors?.map((color, idx) => (
                   <span
                     key={idx}
                     className="w-4 h-4 rounded-full border"
