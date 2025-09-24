@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentPage } from "../../store/reducers/catalogReducer";
 import { addToCart } from "../../store/reducers/shoppingCartReducer";
 import { Link, useHistory } from "react-router-dom";
-import { fetchProductsThunk } from "../../store/thunks/productThunks";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -17,13 +16,6 @@ const ProductList = () => {
     (state) => state.catalog
   );
   const { user } = useSelector((state) => state.client);
-
-  // İlk açılışta ürünleri getir
-  useEffect(() => {
-    if (fetchState === "NOT_FETCHED") {
-      dispatch(fetchProductsThunk());
-    }
-  }, [dispatch, fetchState]);
 
   // Loading ve error state
   if (fetchState === "FETCHING") {
@@ -54,7 +46,7 @@ const ProductList = () => {
 
   const handleAddToCart = (product) => {
     if (!user) {
-      history.push("/auth");
+      history.push("/auth"); // React Router v5 için useHistory
       return;
     }
     dispatch(addToCart(product));
@@ -79,7 +71,6 @@ const ProductList = () => {
                 : "flex flex-col sm:flex-row items-center gap-6 border p-4"
             }
           >
-            {/* Ürün Detayına Gitmek için Resim */}
             <Link to={`/product/${item.id}`} className="w-full">
               <img
                 src={item.image}
@@ -117,7 +108,6 @@ const ProductList = () => {
                 ))}
               </div>
 
-              {/* Sepete Ekle Butonu */}
               <button
                 onClick={() => handleAddToCart(item)}
                 className="bg-[#23A6F0] text-white px-4 py-2 rounded mt-4 hover:bg-blue-700"
@@ -131,7 +121,6 @@ const ProductList = () => {
 
       {/* Sayfalama */}
       <div className="flex justify-center items-center mt-10">
-        {/* First */}
         <button
           className={`px-4 py-3 rounded-l border border-[#BDBDBD] ${
             currentPage === 1
@@ -144,7 +133,6 @@ const ProductList = () => {
           First
         </button>
 
-        {/* Dinamik sayfa numaraları */}
         {Array.from({ length: totalPages }, (_, idx) => (
           <button
             key={idx + 1}
@@ -159,7 +147,6 @@ const ProductList = () => {
           </button>
         ))}
 
-        {/* Next */}
         <button
           className={`px-4 py-3 rounded-r border border-[#BDBDBD] ${
             currentPage === totalPages

@@ -8,6 +8,7 @@ import { fetchCategoriesThunk } from "../store/thunks/categoryThunks";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isShopOpen, setIsShopOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function Header() {
   );
   const user = useSelector((state) => state.client.user);
 
-  const { categories, loading, error } = useSelector((state) => state.category);
+  const { categories } = useSelector((state) => state.category);
 
   useEffect(() => {
     dispatch(fetchCategoriesThunk());
@@ -202,52 +203,56 @@ export default function Header() {
               </Link>
 
               {/* Mobile Shop with categories */}
-              <div className="flex flex-col items-center">
-                <span className="text-[#737373] font-bold">Shop</span>
-                <div className="flex gap-12 mt-4">
-                  {/* Women */}
-                  <div>
-                    <h3 className="font-bold text-[#252B42] mb-2 text-center">
-                      Women
-                    </h3>
-                    <ul className="flex flex-col gap-1">
-                      {categories
-                        .filter((cat) => cat.gender === "k")
-                        .map((cat) => (
-                          <li key={cat.id}>
-                            <Link
-                              to={`/shop/${getGenderPath(cat.gender)}/${cat.title.toLowerCase()}/${cat.id}`}
-                              className="text-[#737373] hover:text-[#23A6F0] font-bold"
-                            >
-                              {cat.title}
-                            </Link>
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
+<div className="flex flex-col items-center">
+  <button
+    className="text-[#737373] font-bold"
+    onClick={() => setIsShopOpen(!isShopOpen)}
+  >
+    Shop
+  </button>
 
-                  {/* Men */}
-                  <div>
-                    <h3 className="font-bold text-[#252B42] mb-2 text-center">
-                      Men
-                    </h3>
-                    <ul className="flex flex-col gap-1">
-                      {categories
-                        .filter((cat) => cat.gender === "e")
-                        .map((cat) => (
-                          <li key={cat.id}>
-                            <Link
-                              to={`/shop/${getGenderPath(cat.gender)}/${cat.title.toLowerCase()}/${cat.id}`}
-                              className="text-[#737373] hover:text-[#23A6F0] font-bold"
-                            >
-                              {cat.title}
-                            </Link>
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
+  {isShopOpen && (
+    <div className="flex gap-12 mt-4">
+      {/* Women */}
+      <div>
+        <h3 className="font-bold text-[#252B42] mb-2 text-center">Women</h3>
+        <ul className="flex flex-col gap-1">
+          {categories
+            .filter((cat) => cat.gender === "k")
+            .map((cat) => (
+              <li key={cat.id}>
+                <Link
+                  to={`/shop/${getGenderPath(cat.gender)}/${cat.title.toLowerCase()}/${cat.id}`}
+                  className="text-[#737373] hover:text-[#23A6F0] font-bold"
+                >
+                  {cat.title}
+                </Link>
+              </li>
+            ))}
+        </ul>
+      </div>
+
+      {/* Men */}
+      <div>
+        <h3 className="font-bold text-[#252B42] mb-2 text-center">Men</h3>
+        <ul className="flex flex-col gap-1">
+          {categories
+            .filter((cat) => cat.gender === "e")
+            .map((cat) => (
+              <li key={cat.id}>
+                <Link
+                  to={`/shop/${getGenderPath(cat.gender)}/${cat.title.toLowerCase()}/${cat.id}`}
+                  className="text-[#737373] hover:text-[#23A6F0] font-bold"
+                >
+                  {cat.title}
+                </Link>
+              </li>
+            ))}
+        </ul>
+      </div>
+    </div>
+  )}
+</div>
 
               <Link to="/aboutUs" className="text-[#737373] hover:text-[#23A6F0]">
                 About

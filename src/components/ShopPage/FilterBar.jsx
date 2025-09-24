@@ -2,10 +2,16 @@ import React from "react";
 import { LayoutGrid, List } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
 import { setViewMode, setSortBy } from "../../store/reducers/catalogReducer";
+import { setFilter } from "../../store/reducers/productReducer";
 
 export default function FilterBar() {
   const dispatch = useDispatch();
-  const { products, viewMode, sortBy } = useSelector((state) => state.catalog);
+
+  // catalogReducer'dan gelen state
+  const { viewMode, sortBy } = useSelector((state) => state.catalog);
+
+  // productReducer'dan gelen state
+  const { productList, filter } = useSelector((state) => state.product);
 
   const handleViewChange = (mode) => {
     dispatch(setViewMode(mode));
@@ -15,10 +21,16 @@ export default function FilterBar() {
     dispatch(setSortBy(e.target.value));
   };
 
+  const handleFilterChange = (e) => {
+    dispatch(setFilter(e.target.value));
+  };
+
   return (
     <div className="bg-[#FFFFFF] container mx-auto flex flex-col md:flex-row justify-between items-center gap-4 py-6 px-4">
       {/* Left - results */}
-      <p className="text-[#737373] font-bold">Showing all {products.length} results</p>
+      <p className="text-[#737373] font-bold">
+        Showing all {productList.length} results
+      </p>
 
       {/* Middle - view options */}
       <div className="flex items-center gap-2">
@@ -43,19 +55,25 @@ export default function FilterBar() {
 
       {/* Right - sort + filter */}
       <div className="flex items-center gap-2">
+        <input
+          type="text"
+          placeholder="Search..."
+          value={filter}
+          onChange={handleFilterChange}
+          className="border bg-[#F9F9F9] rounded px-2 py-2 text-[#737373] focus:outline-none"
+        />
+
         <select
-          className="border bg-[#F9F9F9] rounded px-2 py-4 text-[#737373] focus:outline-none"
+          className="border bg-[#F9F9F9] rounded px-2 py-2 text-[#737373] focus:outline-none"
           value={sortBy}
           onChange={handleSortChange}
         >
-          <option value="popularity">Popularity</option>
+          <option value="">Default</option>
           <option value="lowToHigh">Price: Low to High</option>
           <option value="highToLow">Price: High to Low</option>
+          <option value="popularity">Popularity</option>
           <option value="newest">Newest</option>
         </select>
-        <button className="bg-[#23A6F0] hover:bg-[#23A6F0] text-[#FFFFFF] px-8 py-4 rounded">
-          Filter
-        </button>
       </div>
     </div>
   );
