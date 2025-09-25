@@ -13,12 +13,18 @@ export default function ShopPageContent() {
   const dispatch = useDispatch();
   const { categoryId } = useParams();
 
-  // Redux state'ten sort ve filter değerlerini alıyoruz
-  const { sortBy } = useSelector((state) => state.catalog);
-  const { filter } = useSelector((state) => state.product);
+  // Redux state'ten sort, filter, pagination değerlerini alıyoruz
+  const { sortBy, currentPage, itemsPerPage } = useSelector(
+    (state) => state.catalog
+  );
+  const { filter } = useSelector((state) => state.products);
 
   useEffect(() => {
-    const params = {};
+    const params = {
+      limit: itemsPerPage,
+      offset: (currentPage - 1) * itemsPerPage,
+    };
+
     if (categoryId) params.category = categoryId;
 
     // sort parametresi mapping
@@ -33,7 +39,7 @@ export default function ShopPageContent() {
     if (filter) params.filter = filter;
 
     dispatch(fetchProductsThunk(params));
-  }, [dispatch, categoryId, sortBy, filter]);
+  }, [dispatch, categoryId, sortBy, filter, currentPage, itemsPerPage]);
 
   return (
     <main>

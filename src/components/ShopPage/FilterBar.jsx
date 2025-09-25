@@ -11,7 +11,7 @@ export default function FilterBar() {
   const { viewMode, sortBy } = useSelector((state) => state.catalog);
 
   // productReducer'dan gelen state
-  const { productList, filter } = useSelector((state) => state.product);
+  const { productList, filter } = useSelector((state) => state.products);
 
   const handleViewChange = (mode) => {
     dispatch(setViewMode(mode));

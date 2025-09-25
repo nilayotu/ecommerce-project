@@ -2,7 +2,7 @@ import api from "../api";
 import { setProductList, setTotal, setFetchState } from "../reducers/productReducer";
 
 export const fetchProductsThunk = () => async (dispatch, getState) => {
-  const { limit, offset, filter } = getState().product;
+  const { limit, offset, filter } = getState().products;
 
   dispatch(setFetchState("FETCHING"));
   try {
